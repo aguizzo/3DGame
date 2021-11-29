@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.0f;
+    public GameObject playerObj;
     [SerializeField] private float lateralSpeed = 10.0f;
     private Animator anim;
     public static Vector3 pos;
     // Start is called before the first frame update
     void Start()
     {
+        playerObj = this.gameObject;
         pos = transform.position;
         anim = GetComponentInChildren<Animator>();
         Idle();
@@ -22,10 +23,8 @@ public class player : MonoBehaviour
         pos = transform.position;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            speed = 10.0f;
             Run();
         }
-        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
             if (this.gameObject.transform.position.x > Boundary.leftSide)
@@ -40,6 +39,16 @@ public class player : MonoBehaviour
                 transform.Translate(Vector3.right * Time.deltaTime * lateralSpeed, Space.World);
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            Clone();
+        }
+    }
+
+    private void Clone() {
+        GameObject obj = (GameObject)Instantiate(playerObj, transform.position, playerObj.transform.rotation);
+        obj.transform.parent = transform;
     }
 
     private void Idle() {
@@ -60,5 +69,10 @@ public class player : MonoBehaviour
     private void Dead()
     {
         anim.SetFloat("Animation", 4);
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(this);
     }
 }
