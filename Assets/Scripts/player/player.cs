@@ -7,6 +7,7 @@ public class player : MonoBehaviour
     public GameObject playerObj;
     [SerializeField] private float lateralSpeed = 10.0f;
     private Animator anim;
+    private int nc = 0, nca = 0;
     public static Vector3 pos;
     // Start is called before the first frame update
     void Start()
@@ -42,12 +43,17 @@ public class player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G))
         {
-            Clone();
+            nc++; //cambiar por numero del obstaculo
+            while (nca < nc)
+            {
+                Clone();
+                nca++;
+            }
         }
     }
 
     private void Clone() {
-        GameObject obj = (GameObject)Instantiate(playerObj, transform.position, playerObj.transform.rotation);
+        GameObject obj = (GameObject)Instantiate(playerObj, transform.position + new Vector3(1,0,0), playerObj.transform.rotation);
         obj.transform.parent = transform;
     }
 
