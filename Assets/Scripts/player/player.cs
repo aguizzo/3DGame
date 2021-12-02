@@ -12,8 +12,8 @@ public class player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = this.gameObject;
-        pos = transform.position;
+        playerObj = GameObject.Find("littleswordfighter");
+        pos = playerObj.transform.position;
         anim = GetComponentInChildren<Animator>();
         Idle();
     }
@@ -21,7 +21,7 @@ public class player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pos = transform.position;
+        pos = playerObj.transform.position;
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
             Run();
@@ -53,7 +53,7 @@ public class player : MonoBehaviour
     }
 
     private void Clone() {
-        GameObject obj = (GameObject)Instantiate(playerObj, transform.position + new Vector3(1,0,0), playerObj.transform.rotation);
+        GameObject obj = (GameObject)Instantiate(playerObj, playerObj.transform.position + new Vector3(1,0,0), playerObj.transform.rotation);
         obj.transform.parent = transform;
     }
 
