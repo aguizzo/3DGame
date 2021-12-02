@@ -173,7 +173,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 500
+  far clip plane: 150
   field of view: 45
   orthographic: 0
   orthographic size: 5
@@ -3319,6 +3319,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerObj: {fileID: 0}
   lateralSpeed: 10
+  animStatePublic: 0
+  positionList: []
 --- !u!1001 &1116424904
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5973,6 +5975,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 189742, guid: ec948f8e0c2ff154f8d8ab7b12efce49, type: 3}
   m_PrefabInstance: {fileID: 1762551754}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2038640029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038640027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5fafcc9dc998c4aa073560a015e5d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animState: 0
 --- !u!54 &2038640030
 Rigidbody:
   m_ObjectHideFlags: 0
