@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class OneCharacter : MonoBehaviour
 {
     private Animator anim;
     public float animState;

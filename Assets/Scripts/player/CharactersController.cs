@@ -7,7 +7,7 @@ public class CharactersController : MonoBehaviour
     public GameObject playerObj;
     [SerializeField] private float lateralSpeed = 10.0f;
     private Animator anim;
-    private int nc = 0, nca = 0;
+    private int nc = 1, nca = 1, nc2 = 0, nca2 = 0;
     public static Vector3 pos;
     public static int animState;
     public int animStatePublic;
@@ -53,8 +53,18 @@ public class CharactersController : MonoBehaviour
             nc++; //cambiar por numero del obstaculo
             while (nca < nc)
             {
-                Clone();
-                nca++;
+                if (nca + 1 == 25)
+                {
+                    Evolve();
+                    nc = 0;
+                    nca = 0;
+                    nc2 += 1;
+                }
+                else
+                {
+                    Clone();
+                    nca++;
+                }
             }
         }
         animStatePublic = animState;
@@ -64,7 +74,8 @@ public class CharactersController : MonoBehaviour
     {
         for (int i = 1; i < 5; i++)
         {
-            positionList.AddRange(setPositionsAux(1.2f * i, 25/(5-i)));
+            if(i == 1) positionList.AddRange(setPositionsAux((1.5f + nc2) * i, 25 / (5 - i)));
+            else positionList.AddRange(setPositionsAux(1.5f * i, 25/(5-i)));
         }
     }
 
@@ -82,9 +93,24 @@ public class CharactersController : MonoBehaviour
     }
 
     private void Clone() {
-        GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(0,0,playerObj.transform.position.z)) + positionList[nca], playerObj.transform.rotation);
+        GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(0,0,playerObj.transform.position.z)) + positionList[nca - 1 + nc2], playerObj.transform.rotation);
+        obj.transform.localScale = new Vector3(1, 1, 1);
         Debug.Log(nca);
         obj.transform.parent = transform;
+    }
+
+    private void Evolve()
+    {
+        int ChildsToDestroy = transform.childCount - nca;
+        for (int i = transform.childCount - 1; i > ChildsToDestroy; i-- ) {
+            Debug.Log("Destroying copy " + i);
+            GameObject child = transform.GetChild(i).gameObject;
+            child.transform.parent = null;
+            Destroy(child);
+        }
+        GameObject EvolvingChild = transform.GetChild(transform.childCount - 1).gameObject;
+        Debug.Log("evoluciona hijo numero: " + (transform.childCount));
+        EvolvingChild.transform.localScale *= 1.5f;
     }
 
 
