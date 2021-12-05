@@ -16,9 +16,9 @@ public class OneCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (anim.GetFloat("Animation") != CharactersController.animState)
+        if (anim.GetFloat("Animation") != CharsController.animState)
         {
-            anim.SetFloat("Animation", CharactersController.animState);
+            anim.SetFloat("Animation", CharsController.animState);
         }
     }
 }
