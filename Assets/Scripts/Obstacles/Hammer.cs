@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class Hammer : MonoBehaviour
 {
-    // Start is called before the first frame update
     float direction = 1.0f;
-    float speed = 3.0f;
+    public float speed = 20.0f;
+    public float limitDown = 90.0f;
 
+    // Start is called before the first frame update
     void Start()
     {
         
@@ -16,15 +17,17 @@ public class Hammer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(0.0f, direction * speed * Time.deltaTime, 0.0f);
-        if(direction == 1.0f && transform.position.y > 15.0f) 
         {
-            direction = -1.0f;
-        }
+            transform.Rotate(0.0f, 0.0f, direction * speed * Time.deltaTime * Mathf.PI);
+            if (direction == 1.0f && transform.eulerAngles.z > limitDown)
+            {
+                direction = -1.0f;
+            }
 
-        if (direction == -1.0f && transform.position.y <= 5.0f)
-        {
-            direction = 1.0f;
+            if (direction == -1.0f && transform.eulerAngles.z >= 355.0f)
+            {
+                direction = 1.0f;
+            }
         }
     }
 }
