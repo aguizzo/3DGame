@@ -20,10 +20,10 @@ public class LevelCreator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(CharsController.pos.z);
+      //  Debug.Log(CharsController.pos.z);
         if (CharsController.pos.z > (sections * 28) - 5 * 28)
         {
-            Debug.Log("Instanciando");
+         //   Debug.Log("Instanciando");
             GameObject nf = (GameObject)Instantiate(prefabs[0], new Vector3(0, 0, 28 * sections), prefabs[0].transform.rotation);
             nf.transform.parent = transform;
             sections++;

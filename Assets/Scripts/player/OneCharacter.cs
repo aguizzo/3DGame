@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class OneCharacter : MonoBehaviour
 {
     private Animator anim;
     public float animState;
+    bool alive = true;
 
     void Start()
     {
@@ -16,9 +18,26 @@ public class OneCharacter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (anim.GetFloat("Animation") != CharsController.animState)
+        if (!alive)
+            return;
+        else 
         {
-            anim.SetFloat("Animation", CharsController.animState);
+            if (anim.GetFloat("Animation") != CharsController.animState)
+            {
+                anim.SetFloat("Animation", CharsController.animState);
+            }
         }
+    }
+
+    void OnTriggerEnter(Collider other) 
+    {
+        Debug.Log("hola");
+       // Die();
+    }
+
+    public void Die()
+    {
+        alive = false;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
