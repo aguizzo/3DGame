@@ -4,20 +4,36 @@ using UnityEngine;
 
 public class GroupMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 0.0f;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private float speed = 0f;
+    private bool start = true;
+    private GameObject cam;
+    private float battlePosZ;
+
+    private void Start()
     {
-        
+        cam = transform.GetChild(1).gameObject;
+        battlePosZ = transform.position.z + 10;
     }
 
-    // Update is called once per frame
+    //UPDATE//
     void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+        if (LevelController.inBattle) {
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, transform.position.y, battlePosZ), 10 * Time.deltaTime);
+            speed = 0f;
+        }
+        else battlePosZ = transform.position.z + 10;
+
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && start == true)
         {
-            speed = 10.0f;
+            speed = 10f;
+            start = false;
         }
         transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
+    }
+
+    public void Move()
+    {
+        speed = 10f;
     }
 }

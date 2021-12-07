@@ -13,7 +13,7 @@ public class OneEnemy : MonoBehaviour
         animState = anim.GetFloat("Animation");
     }
 
-    // Update is called once per frame
+    //UPDATE//
     void Update()
     {
         if (anim.GetFloat("Animation") != EnemiesController.animStateEnemy)

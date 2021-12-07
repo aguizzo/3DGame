@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemiesController : MonoBehaviour
 {
     public GameObject playerObj;
-    [SerializeField] private float lateralSpeed = 10.0f;
-    private Animator anim;
     public int nc = 1, nca = 1, nca2 = 0;
     public static Vector3 pos;
     public static int animStateEnemy;
@@ -14,30 +12,35 @@ public class EnemiesController : MonoBehaviour
     private Vector3 startPosition;
     public List<Vector3> positionList;
     public int CombatPower;
+    public int giantLife;
 
     // Start is called before the first frame update
     void Start()
     {
         playerObj = transform.GetChild(0).gameObject;
         pos = playerObj.transform.position;
-        anim = GetComponentInChildren<Animator>();
         animStateEnemy = 0;
         startPosition = playerObj.transform.position;
-        Debug.Log(startPosition);
         setPositions();
         CombatPower = 1;
+        giantLife = 25;
     }
 
-    // Update is called once per frame
+    //UPDATE//
     void Update()
     {
-        pos = playerObj.transform.position;
+        if(playerObj != null)pos = playerObj.transform.position;
         if (Input.GetKeyDown(KeyCode.F))
         {
             growArmy(7);
         }
         animStatePublic = animStateEnemy;
         CombatPower = nca + nca2 * 25;
+
+        if (LevelController.inBattle)
+        {
+            animStateEnemy = 2;
+        }
     }
 
     private void growArmy(int c)
@@ -111,5 +114,34 @@ public class EnemiesController : MonoBehaviour
         GameObject EvolvingChild = transform.GetChild(transform.childCount - 1).gameObject;
         Debug.Log("evoluciona hijo numero: " + (transform.childCount));
         EvolvingChild.transform.localScale *= 1.5f;
+    }
+
+    public void destroyLastChild()
+    {
+        if(nca != 0)
+        {
+            GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
+            Debug.Log("enemy child count: " + (transform.childCount - 1));
+            g.transform.parent = null;
+            Destroy(g);
+            nc -= 1;
+            nca -= 1;
+        }
+        else if(nca2 != 0)
+        {
+            if (giantLife != 0)
+            {
+                giantLife -= 1;
+                Debug.Log("gigante pierde una vida, vida restante: " + giantLife);
+            }
+            else
+            {
+                GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
+                g.transform.parent = null;
+                Destroy(g);
+                nca2 -= 1;
+                if (nca2 != 0) giantLife = 10;
+            }
+        }
     }
 }
