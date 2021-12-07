@@ -26,7 +26,7 @@ public class ObstCol : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "littleswordfighter") 
+        if (collision.gameObject.name == "littleswordfighter" || collision.gameObject.name == "littleswordfighter(Clone)") 
         {
             oneCharacter.Die();
             Destroy(collision.GetComponent<Collider>().gameObject);
