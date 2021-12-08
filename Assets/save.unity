@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 037bb9505faf88d4e83a000f255e1333, type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -2400,6 +2400,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 343432347}
   m_Mesh: {fileID: 8755828497624652766, guid: 2f5ee584f2f540d4e8d6bcb77a5bfaf5, type: 3}
+--- !u!224 &350545179 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8994565651007334674, guid: 0225a26f525cd5045837dcfc5413ac3e, type: 3}
+  m_PrefabInstance: {fileID: 3193208948142105992}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &397016712
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2725,7 +2730,7 @@ Transform:
   m_LocalPosition: {x: -199.70325, y: 10.657793, z: 6.248596}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1825368475}
+  - {fileID: 350545179}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7529,11 +7534,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97978387d041db2429e6dabd7b1c4f8f, type: 3}
---- !u!4 &1825368475 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3193208948741573651, guid: 0225a26f525cd5045837dcfc5413ac3e, type: 3}
-  m_PrefabInstance: {fileID: 3193208948142105992}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1861970456 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400386, guid: 97978387d041db2429e6dabd7b1c4f8f, type: 3}
