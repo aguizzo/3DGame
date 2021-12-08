@@ -20,7 +20,7 @@ public class LevelController : MonoBehaviour
     public static float leftSide = -8f;
     public static float rightSide = 8f;
 
-    private int[] level = { 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0};
+    private int[] level = { 0, 0, 0, 1, 0, 1, 2,3,4,5,6,7,8,9};
 
     // Start is called before the first frame update
     void Start()
@@ -51,8 +51,7 @@ public class LevelController : MonoBehaviour
             sections++;
         }
 
-        Debug.Log(pv.GetComponentInChildren<Transform>().position.z - (Enemies[NextEnemyIndex].transform.position.z - 10));
-        if (!inBattle && pv.GetComponentInChildren<Transform>().position.z > Enemies[NextEnemyIndex].transform.position.z - 10)
+        if (!inBattle && Enemies.Count != 0 && pv.GetComponentInChildren<Transform>().position.z > Enemies[NextEnemyIndex].transform.position.z - 10)
         {
             Debug.Log("inicio de la batalla");
             inBattle = true;

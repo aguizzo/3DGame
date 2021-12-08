@@ -2011,6 +2011,14 @@ MonoBehaviour:
   prefabs:
   - {fileID: 7870537901713574309, guid: 7595b960ea81ddc439a52607c1874eef, type: 3}
   - {fileID: 9138097855537170579, guid: 47e03b30d7bfdcc45a3608496f81c8e5, type: 3}
+  - {fileID: 3366250120635916173, guid: 4d1324f68de7443459d64a51b557f5a3, type: 3}
+  - {fileID: 5636001551484283697, guid: 49d05651493c56d4b8b28835d9839d84, type: 3}
+  - {fileID: 5210203706456519829, guid: 7149f2ca1f0663f408ca035f7e2a03ff, type: 3}
+  - {fileID: 4267088290702884603, guid: 92acb8c951d090e46bd002e94335b91f, type: 3}
+  - {fileID: 1905985908283338102, guid: 8e328ea6837f5e146a615d5d825f477d, type: 3}
+  - {fileID: 773489149708908093, guid: 696c0a3b3427e534085a93c3bf220b9f, type: 3}
+  - {fileID: 6391647683310522054, guid: 558c73098c27e7044ae7ff22b842017c, type: 3}
+  - {fileID: 6443587328407168492, guid: d958525d4995bfa49a5a6fc759025d91, type: 3}
 --- !u!1001 &286883884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5361,7 +5369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42d2deec0be31114cb83087789eb1ba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerObj: {fileID: 0}
+  playerObj: {fileID: 8426579793212642671, guid: 7f47b90ec5ef0ed41a0d7a71e9c24bed, type: 3}
   lateralSpeed: 10
   nc: 1
   nca: 1

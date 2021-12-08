@@ -22,8 +22,7 @@ public class CharsController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = transform.GetChild(0).gameObject;
-        pos = playerObj.transform.position;
+        pos = transform.position;
         startPosition = new Vector3(0,pos.y, 0);
         anim = GetComponentInChildren<Animator>();
         animState = 0;
@@ -38,7 +37,7 @@ public class CharsController : MonoBehaviour
     //UPDATE//
     void Update()
     {
-        pos = playerObj.transform.position;
+        pos = transform.position;
         if (LevelController.inBattle)
         {
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, transform.position.y, transform.position.z), 10 * Time.deltaTime);
