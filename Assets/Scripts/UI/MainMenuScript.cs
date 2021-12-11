@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+    private void Start()
+    {
+        FindObjectOfType<AudioManager>().Play("MenuTheme");
+    }
     public void PlayGame()
     {
         SceneManager.LoadScene("save");

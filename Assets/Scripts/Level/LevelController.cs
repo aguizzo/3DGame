@@ -32,6 +32,7 @@ public class LevelController : MonoBehaviour
         NextEnemyIndex = 0;
         inBattle = false;
         Enemies = new List<GameObject>();
+        FindObjectOfType<AudioManager>().Play("LevelTheme");
         loadStartLevel1();
     }
 
