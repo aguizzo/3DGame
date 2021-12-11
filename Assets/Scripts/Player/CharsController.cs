@@ -26,7 +26,7 @@ public class CharsController : MonoBehaviour
         startPosition = new Vector3(0,pos.y, 0);
         anim = GetComponentInChildren<Animator>();
         animState = 0;
-        setPositions();
+        calculatePositions();
         CombatPower = 1;
         lateralSpeed = 0;
         start = true;
@@ -64,7 +64,7 @@ public class CharsController : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            growArmy(7);
+            growArmy(9,false);
         }
         animStatePublic = animState;
         CombatPower = nca + nca2 * 25;
@@ -85,16 +85,18 @@ public class CharsController : MonoBehaviour
             transform.Translate(Vector3.right * Time.deltaTime * lateralSpeed, Space.World);
         }
     }
-    private void growArmy(int c)
+    public void growArmy(int c, bool m)
     {
-        nc+=c; //cambiar por numero del obstaculo
+        if (m) nc *= c;
+        else nc += c;
         while (nca < nc)
         {
             if (nca + 1 == 25)
             {
+                nca++;
                 Evolve();
                 nc -= 25;
-                nca -= 24;
+                nca -= 25;
                 nca2 += 1;
             }
             else
@@ -105,15 +107,26 @@ public class CharsController : MonoBehaviour
         }
     }
 
-    private void setPositions()
+    private void calculatePositions()
     {
+        positionList.Add(startPosition);
         for (int i = 1; i < 5; i++)
         {
-            positionList.AddRange(setPositionsAux(1.5f * i, 25/(5-i)));
+            positionList.AddRange(calculatePositionsAux(1.5f * i, 25/(5-i)));
+        }
+    }
+    
+    private void setPositions()
+    {
+        int it = 0;
+        foreach (Transform child in transform.GetComponentInChildren<Transform>())
+        {
+            child.position = positionList[it] + new Vector3(transform.position.x, 0, transform.position.z);
+            it++;
         }
     }
 
-    private List<Vector3> setPositionsAux(float distance, int count)
+    private List<Vector3> calculatePositionsAux(float distance, int count)
     {
         List<Vector3> auxposlist = new List<Vector3>();
         for(int i = 0; i<count; i++)
@@ -127,14 +140,14 @@ public class CharsController : MonoBehaviour
     }
 
     private bool Clone() {
-        if ((nca - 1 + nca2) > (positionList.Count - 1))
+        if ((nca + nca2) > (positionList.Count - 1))
         {
             Debug.Log("no more clones can be added");
             return false;
         }
         else
         {
-            GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca - 1 + nca2], playerObj.transform.rotation);
+            GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2], playerObj.transform.rotation);
             obj.transform.localScale = new Vector3(1, 1, 1);
             Debug.Log(nca);
             obj.transform.parent = transform;
@@ -151,9 +164,11 @@ public class CharsController : MonoBehaviour
             child.transform.parent = null;
             Destroy(child);
         }
-        GameObject EvolvingChild = transform.GetChild(transform.childCount - 1).gameObject;
-        Debug.Log("evoluciona hijo numero: " + (transform.childCount));
+        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2], playerObj.transform.rotation);
+        EvolvingChild.transform.parent = transform;
+        EvolvingChild.GetComponent<OneCharacter>().big = true;
         EvolvingChild.transform.localScale *= 1.5f;
+        setPositions();
     }
 
     public void destroyLastChild()
@@ -182,5 +197,15 @@ public class CharsController : MonoBehaviour
     public void Move()
     {
         animState = 1;
+    }
+
+    public void ChildDeath(GameObject a)
+    {
+        if (a.GetComponent<OneCharacter>().big) nca2--;
+        else
+        {
+            nc--;
+            nca--;
+        }
     }
 }

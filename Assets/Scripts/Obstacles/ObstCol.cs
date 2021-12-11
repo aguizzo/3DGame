@@ -18,18 +18,23 @@ public class ObstCol : MonoBehaviour
     {
        // if (collision.gameObject.name == "littleswordfighter")
       //  {
-            oneCharacter.Die();
-            Destroy(collision.collider.gameObject);
-            Debug.Log("collision");
+        oneCharacter.Die();
+        GameObject a = collision.collider.gameObject;
+        a.transform.parent = null;
+        Destroy(a);
+        Debug.Log("collision");
        // }
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.name == "littleswordfighter" || collision.gameObject.name == "littleswordfighter(Clone)") 
+        if (collision.gameObject.name == "Player" || collision.gameObject.name == "Player(Clone)") 
         {
             oneCharacter.Die();
-            Destroy(collision.GetComponent<Collider>().gameObject);
+            GameObject a = collision.GetComponent<Collider>().gameObject;
+            a.transform.parent.GetComponent<CharsController>().ChildDeath(a);
+            a.transform.parent = null;
+            Destroy(a);
             Debug.Log("collision");
         }
     }

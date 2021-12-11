@@ -7,7 +7,8 @@ public class OneCharacter : MonoBehaviour
 {
     private Animator anim;
     public float animState;
-    bool alive = true;
+    private bool alive = true;
+    public bool big = false;
 
     void Start()
     {
@@ -31,7 +32,7 @@ public class OneCharacter : MonoBehaviour
 
     void OnTriggerEnter(Collider other) 
     {
-        Debug.Log("hola");
+        //Debug.Log("hola");
        // Die();
     }
 
