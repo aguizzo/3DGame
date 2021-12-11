@@ -816,6 +816,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animState: 0
+  big: 0
 --- !u!1 &8426579793212643013
 GameObject:
   m_ObjectHideFlags: 0

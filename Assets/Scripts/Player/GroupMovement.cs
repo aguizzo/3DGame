@@ -26,7 +26,7 @@ public class GroupMovement : MonoBehaviour
 
         if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && start == true)
         {
-            speed = 10f;
+            speed = 15f;
             start = false;
         }
         transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
@@ -34,6 +34,6 @@ public class GroupMovement : MonoBehaviour
 
     public void Move()
     {
-        speed = 10f;
+        speed = 15f;
     }
 }

@@ -13,23 +13,26 @@ public class EnemiesController : MonoBehaviour
     public List<Vector3> positionList;
     public int CombatPower;
     public int giantLife;
+    private GameObject text;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerObj = transform.GetChild(0).gameObject;
-        pos = playerObj.transform.position;
+        text = transform.GetChild(0).GetChild(0).gameObject;
+        text.transform.parent.GetComponent<Canvas>().worldCamera = FindObjectOfType<Camera>();
+        pos = transform.position;
         animStateEnemy = 0;
-        startPosition = playerObj.transform.position;
+        startPosition = transform.position;
         setPositions();
         CombatPower = 1;
         giantLife = 25;
+        text.GetComponent<UnityEngine.UI.Text>().text = CombatPower.ToString();
     }
 
     //UPDATE//
     void Update()
     {
-        if(playerObj != null)pos = playerObj.transform.position;
+        pos = transform.position;
         if (Input.GetKeyDown(KeyCode.F))
         {
             growArmy(7);
@@ -41,6 +44,7 @@ public class EnemiesController : MonoBehaviour
         {
             animStateEnemy = 2;
         }
+        text.GetComponent<UnityEngine.UI.Text>().text = CombatPower.ToString();
     }
 
     private void growArmy(int c)
@@ -65,6 +69,7 @@ public class EnemiesController : MonoBehaviour
 
     private void setPositions()
     {
+        Debug.Log("setting positions for enemies");
         for (int i = 1; i < 5; i++)
         {
             positionList.AddRange(setPositionsAux(1.5f * i, 25 / (5 - i)));
