@@ -12,7 +12,7 @@ public class LevelController : MonoBehaviour
     public static bool inBattle;
     private float startTime;
     private float time = 0f;
-    private float interpolationPeriod = 0.5f;
+    private float interpolationPeriod = 0.2f;
     private Vector3 initialPos;
     private bool final = false, start = true;
 
@@ -20,7 +20,7 @@ public class LevelController : MonoBehaviour
 
     public static float leftSide = -8f;
     public static float rightSide = 8f;
-    private int[] level1 = { 0, 0, 0, 10, 0, 10, 2, 0, 10, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11 };
+    private int[] level1 = { 0, 1, 0, 1, 0, 10, 2, 0, 10, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11 };
     private int[] level2 = { 0, 0, 0, 2, 2, 3, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] level3 = { 0, 0, 0, 10, 10, 10, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
     private int[] level4 = { 0, 0, 0, 10, 10, 10, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -66,7 +66,7 @@ public class LevelController : MonoBehaviour
             }
         }
 
-            if (!inBattle && Enemies.Count != 0 && pv.GetComponentInChildren<Transform>().position.z > Enemies[NextEnemyIndex].transform.position.z - 10)
+        if (!inBattle && Enemies.Count != 0 && pv.GetComponentInChildren<Transform>().position.z > Enemies[NextEnemyIndex].transform.position.z - 10)
         {
             inBattle = true;
             actualEnemy = Enemies[NextEnemyIndex];

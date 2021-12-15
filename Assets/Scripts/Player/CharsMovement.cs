@@ -14,7 +14,7 @@ public class CharsMovement : MonoBehaviour
     void Start()
     {
         text = transform.GetChild(1).GetChild(0).gameObject;
-        text.GetComponent<UnityEngine.UI.Text>().text = CharsController.CombatPower.ToString();
+        text.GetComponent<UnityEngine.UI.Text>().text = CharsController.Life.ToString();
         start = true;
         inBattle = false;
         pos = transform.position;
@@ -47,7 +47,7 @@ public class CharsMovement : MonoBehaviour
                 moveRight();
             }
         }
-        text.GetComponent<UnityEngine.UI.Text>().text = CharsController.CombatPower.ToString();
+        text.GetComponent<UnityEngine.UI.Text>().text = CharsController.Life.ToString();
     }
     private void moveLeft()
     {
