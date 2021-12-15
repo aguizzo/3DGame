@@ -42,7 +42,7 @@ public class LevelController : MonoBehaviour
         loadStartLevel();
     }
 
-    void NextLevel()
+    public void NextLevel()
     {
         lvl++;
         switch (lvl)
@@ -65,6 +65,7 @@ public class LevelController : MonoBehaviour
         NextEnemyIndex = 0;
         inBattle = false;
         Enemies = new List<GameObject>();
+        Debug.Log(lvl);
         loadStartLevel();
     }
 
@@ -92,10 +93,12 @@ public class LevelController : MonoBehaviour
         if (inBattle && time >= interpolationPeriod)
         {
             time = time - interpolationPeriod;
+            FindObjectOfType<AudioManager>().Play("SwordClash");
             if (Enemies[NextEnemyIndex].transform.childCount != 1 && units.transform.childCount != 0)
             {
                 Enemies[NextEnemyIndex].GetComponent<EnemiesController>().destroyLastChild();
                 units.GetComponent<CharsController>().destroyLastChild();
+                
             }
             else if (Enemies[NextEnemyIndex].transform.childCount == 1) {
                 GameObject en = Enemies[NextEnemyIndex];
