@@ -111,17 +111,23 @@ public class EnemiesController : MonoBehaviour
         int ChildsToDestroy = transform.childCount - nca;
         for (int i = transform.childCount - 1; i > ChildsToDestroy; i--)
         {
-            Debug.Log("Destroying copy " + i);
             GameObject child = transform.GetChild(i).gameObject;
-            child.transform.parent = null;
-            Destroy(child);
+            if (child.GetComponent<OneCharacter>().big == 1)
+            {
+                ChildsToDestroy--;
+            }
+            else
+            {
+                child.transform.parent = null;
+                Destroy(child);
+            }
         }
         GameObject EvolvingChild = transform.GetChild(transform.childCount - 1).gameObject;
         Debug.Log("evoluciona hijo numero: " + (transform.childCount));
         EvolvingChild.transform.localScale *= 1.5f;
     }
 
-    public void destroyLastChild()
+    public void getDamage()
     {
         if(nca != 0)
         {

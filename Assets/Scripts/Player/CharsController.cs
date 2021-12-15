@@ -5,14 +5,14 @@ using UnityEngine;
 public class CharsController : MonoBehaviour
 {
     public GameObject playerObj;
-    public int nc = 1, nca = 1, nca2 = 0;
+    public int nc = 1, nca = 1, nca2 = 0, nca3 = 0;
     public static Vector3 pos;
     public static int animState;
     public int animStatePublic;
     private Vector3 startPosition;
     public List<Vector3> positionList;
     public static int CombatPower;
-    private int giantLife;
+    private int giantLife, enormLife;
     
 
     // Start is called before the first frame update
@@ -24,6 +24,7 @@ public class CharsController : MonoBehaviour
         calculatePositions();
         CombatPower = 1;
         giantLife = 25;
+        enormLife = 125;
     }
 
     //UPDATE//
@@ -35,12 +36,16 @@ public class CharsController : MonoBehaviour
             growArmy(9, false);
         }
         animStatePublic = animState;
-        CombatPower = nca + nca2 * 25;
+        CombatPower = nca + nca2 * 25 + nca3 * 125;
     }
 
     public void growArmy(int c, bool m)
     {
-        if (m) nc *= c;
+        if (m)
+        {
+            Debug.Log(CombatPower);
+            nc = CombatPower * c - nca2 * 25 - nca3 * 125;
+        }
         else nc += c;
         while (nca < nc)
         {
@@ -51,6 +56,12 @@ public class CharsController : MonoBehaviour
                 nc -= 25;
                 nca -= 25;
                 nca2 += 1;
+                if (nca2 == 5)
+                {
+                    Evolve2();
+                    nca2 -= 5;
+                    nca3 += 1;
+                }
             }
             else
             {
@@ -100,7 +111,7 @@ public class CharsController : MonoBehaviour
         }
         else
         {
-            GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2], playerObj.transform.rotation);
+            GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
             obj.transform.localScale = new Vector3(1, 1, 1);
             Debug.Log(nca);
             obj.transform.parent = transform;
@@ -117,14 +128,32 @@ public class CharsController : MonoBehaviour
             child.transform.parent = null;
             Destroy(child);
         }
-        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2], playerObj.transform.rotation);
+        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
         EvolvingChild.transform.parent = transform;
-        EvolvingChild.GetComponent<OneCharacter>().big = true;
+        EvolvingChild.GetComponent<OneCharacter>().big = 1;
         EvolvingChild.transform.localScale *= 1.5f;
         setPositions();
     }
 
-    public void destroyLastChild()
+    private void Evolve2()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+            if(child.GetComponent<OneCharacter>().big == 1)
+            {
+                child.transform.parent = null;
+                Destroy(child);
+            }
+        }
+        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
+        EvolvingChild.transform.parent = transform;
+        EvolvingChild.GetComponent<OneCharacter>().big = 2;
+        EvolvingChild.transform.localScale *= 2f;
+        setPositions();
+    }
+
+    public void getDamage()
     {
         if (nca != 0)
         {
@@ -143,7 +172,19 @@ public class CharsController : MonoBehaviour
                 g.transform.parent = null;
                 Destroy(g);
                 nca2 -= 1;
-                if (nca2 != 0) giantLife = 10;
+                if (nca2 != 0) giantLife = 25;
+            }
+        }
+        else if (nca3 != 0)
+        {
+            if (giantLife != 0) giantLife -= 1;
+            else
+            {
+                GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
+                g.transform.parent = null;
+                Destroy(g);
+                nca3 -= 1;
+                if (nca3 != 0) enormLife = 125;
             }
         }
     }
@@ -154,7 +195,9 @@ public class CharsController : MonoBehaviour
 
     public void ChildDeath(GameObject a)
     {
-        if (a.GetComponent<OneCharacter>().big) nca2--;
+        int size = a.GetComponent<OneCharacter>().big;
+        if (size == 1) nca2--;
+        else if (size == 2) nca3--;
         else
         {
             nc--;

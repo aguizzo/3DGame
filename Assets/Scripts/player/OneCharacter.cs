@@ -8,7 +8,7 @@ public class OneCharacter : MonoBehaviour
     private Animator anim;
     public float animState;
     private bool alive = true;
-    public bool big = false;
+    public int big = 0;
 
     void Start()
     {
