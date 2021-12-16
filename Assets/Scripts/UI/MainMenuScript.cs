@@ -12,6 +12,7 @@ public class MainMenuScript : MonoBehaviour
     public void PlayGame()
     {
         SceneManager.LoadScene("save");
+        FindObjectOfType<AudioManager>().StopPlaying("MenuTheme");
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8117484889838078905
+--- !u!1 &4071454264134086181
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8117484889838078907}
-  - component: {fileID: 8117484889838078904}
+  - component: {fileID: 6271004553822334553}
+  - component: {fileID: 3520106694468500709}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8117484889838078907
+--- !u!4 &6271004553822334553
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8117484889838078905}
+  m_GameObject: {fileID: 4071454264134086181}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8117484889838078904
+--- !u!114 &3520106694468500709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8117484889838078905}
+  m_GameObject: {fileID: 4071454264134086181}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 277f98387f43c4e4fa48b662efe5eeee, type: 3}
@@ -51,14 +51,32 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: MenuTheme
-    clip: {fileID: 8300000, guid: 238c4b3a67d2dc941bfdba7e21456016, type: 3}
-    volume: 0.413
+    clip: {fileID: 8300000, guid: 9d18a05c3d2cdf7498ba7a0df603dba8, type: 3}
+    volume: 0.209
     pitch: 1
     loop: 1
     source: {fileID: 0}
   - name: LevelTheme
-    clip: {fileID: 8300000, guid: 6767b2ed4c1d70b4ea2f449d7c0a24cf, type: 3}
+    clip: {fileID: 8300000, guid: bca13fc92c1d2dc49afb906f4a12bb95, type: 3}
     volume: 0.413
     pitch: 1
     loop: 1
+    source: {fileID: 0}
+  - name: SwordClash
+    clip: {fileID: 8300000, guid: ded426aa435617342badb3672cfcd8c2, type: 3}
+    volume: 0.413
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Pressure
+    clip: {fileID: 8300000, guid: 701d54c96d5403342a0248848cca3845, type: 3}
+    volume: 0.413
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Recruitment
+    clip: {fileID: 8300000, guid: 3fd1194ff763bd04c937dd54bca93a36, type: 3}
+    volume: 0.413
+    pitch: 1
+    loop: 0
     source: {fileID: 0}

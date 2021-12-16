@@ -6,6 +6,7 @@ public class OneEnemy : MonoBehaviour
 {
     private Animator anim;
     public float animState;
+    public int big = 0;
 
     void Start()
     {

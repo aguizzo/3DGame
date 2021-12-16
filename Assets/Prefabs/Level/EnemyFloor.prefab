@@ -186,6 +186,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3507714895218449440}
     m_Modifications:
+    - target: {fileID: 1844045447686845581, guid: 0225a26f525cd5045837dcfc5413ac3e, type: 3}
+      propertyPath: m_Color.b
+      value: 0.2117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844045447686845581, guid: 0225a26f525cd5045837dcfc5413ac3e, type: 3}
+      propertyPath: m_Color.g
+      value: 0.2117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 1844045447686845581, guid: 0225a26f525cd5045837dcfc5413ac3e, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3193208948741573649, guid: 0225a26f525cd5045837dcfc5413ac3e, type: 3}
       propertyPath: m_Name
       value: EnemyGroup

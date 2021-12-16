@@ -5,14 +5,14 @@ using UnityEngine;
 public class CharsController : MonoBehaviour
 {
     public GameObject playerObj;
-    public int nc = 1, nca = 1, nca2 = 0;
+    public int nc = 1, nca = 1, nca2 = 0, nca3 = 0;
     public static Vector3 pos;
     public static int animState;
     public int animStatePublic;
     private Vector3 startPosition;
     public List<Vector3> positionList;
-    public static int CombatPower;
-    private int giantLife;
+    private int CombatPower, giantLife, enormLife;
+    public static int Life;
     
 
     // Start is called before the first frame update
@@ -23,7 +23,10 @@ public class CharsController : MonoBehaviour
         animState = 0;
         calculatePositions();
         CombatPower = 1;
-        giantLife = 25;
+        giantLife = 20;
+        enormLife = 100;
+        Life = (CombatPower - (20 - giantLife) - (100 - enormLife));
+        transform.GetComponent<ParticleSystem>().Stop();
     }
 
     //UPDATE//
@@ -32,25 +35,36 @@ public class CharsController : MonoBehaviour
         pos = transform.position;
         if (Input.GetKeyDown(KeyCode.G))
         {
-            growArmy(9, false);
+            growArmy(1, false);
         }
         animStatePublic = animState;
-        CombatPower = nca + nca2 * 25;
+        CombatPower = nca + nca2 * 20 + nca3 * 100;
+        Life = (CombatPower - (20 - giantLife) - (100 - enormLife));
     }
 
     public void growArmy(int c, bool m)
     {
-        if (m) nc *= c;
+        if (m)
+        {
+            Debug.Log(CombatPower);
+            nc = CombatPower * c - nca2 * 20 - nca3 * 100;
+        }
         else nc += c;
         while (nca < nc)
         {
-            if (nca + 1 == 25)
+            if (nca + 1 == 20)
             {
                 nca++;
                 Evolve();
-                nc -= 25;
-                nca -= 25;
+                nc -= 20;
+                nca -= 20;
                 nca2 += 1;
+                if (nca2 == 5)
+                {
+                    Evolve2();
+                    nca2 -= 5;
+                    nca3 += 1;
+                }
             }
             else
             {
@@ -93,14 +107,14 @@ public class CharsController : MonoBehaviour
     }
 
     private bool Clone() {
-        if ((nca + nca2) > (positionList.Count - 1))
+        if ((nca + nca2 + nca3) > (positionList.Count - 1))
         {
             Debug.Log("no more clones can be added");
             return false;
         }
         else
         {
-            GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2], playerObj.transform.rotation);
+            GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
             obj.transform.localScale = new Vector3(1, 1, 1);
             Debug.Log(nca);
             obj.transform.parent = transform;
@@ -117,14 +131,32 @@ public class CharsController : MonoBehaviour
             child.transform.parent = null;
             Destroy(child);
         }
-        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2], playerObj.transform.rotation);
+        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
         EvolvingChild.transform.parent = transform;
-        EvolvingChild.GetComponent<OneCharacter>().big = true;
+        EvolvingChild.GetComponent<OneCharacter>().big = 1;
         EvolvingChild.transform.localScale *= 1.5f;
         setPositions();
     }
 
-    public void destroyLastChild()
+    private void Evolve2()
+    {
+        for (int i = transform.childCount - 1; i >= 0; i--)
+        {
+            GameObject child = transform.GetChild(i).gameObject;
+            if(child.GetComponent<OneCharacter>().big == 1)
+            {
+                child.transform.parent = null;
+                Destroy(child);
+            }
+        }
+        GameObject EvolvingChild = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
+        EvolvingChild.transform.parent = transform;
+        EvolvingChild.GetComponent<OneCharacter>().big = 2;
+        EvolvingChild.transform.localScale *= 2f;
+        setPositions();
+    }
+
+    public void getDamage()
     {
         if (nca != 0)
         {
@@ -143,18 +175,42 @@ public class CharsController : MonoBehaviour
                 g.transform.parent = null;
                 Destroy(g);
                 nca2 -= 1;
-                if (nca2 != 0) giantLife = 10;
+                if (nca2 != 0) giantLife = 20;
+            }
+        }
+        else if (nca3 != 0)
+        {
+            if (enormLife != 0) enormLife -= 1;
+            else
+            {
+                GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
+                g.transform.parent = null;
+                Destroy(g);
+                nca3 -= 1;
+                if (nca3 != 0) enormLife = 100;
             }
         }
     }
     public void Move()
     {
         animState = 1;
+        giantLife = 20;
+        enormLife = 100;
+        transform.GetComponent<ParticleSystem>().Play();
+        StartCoroutine(healing());
+    }
+
+    IEnumerator healing()
+    {
+        yield return new WaitForSecondsRealtime(1f);
+        transform.GetComponent<ParticleSystem>().Stop();
     }
 
     public void ChildDeath(GameObject a)
     {
-        if (a.GetComponent<OneCharacter>().big) nca2--;
+        int size = a.GetComponent<OneCharacter>().big;
+        if (size == 1) nca2--;
+        else if (size == 2) nca3--;
         else
         {
             nc--;

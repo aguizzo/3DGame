@@ -17,7 +17,7 @@ public class SpikePressure : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (disabled)
+        if (disabled && spikesTransform.position.y >= -6.0f)
         {
             spikesTransform.Translate(0.0f, -speed * Time.deltaTime, 0.0f);
         }
