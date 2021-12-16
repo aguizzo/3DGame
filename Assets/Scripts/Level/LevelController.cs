@@ -31,8 +31,8 @@ public class LevelController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     { 
-        lvl = 5;
-        level = level5;
+        lvl = 1;
+        level = level1;
         pv = GameObject.Find("PlayerView");
         units = pv.transform.GetChild(0).GetChild(0).gameObject;
         initialPos = pv.transform.position;
