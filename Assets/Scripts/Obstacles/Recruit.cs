@@ -31,5 +31,6 @@ public class Recruit : MonoBehaviour
         Debug.Log("Trigger");
         other.transform.parent.GetComponent<CharsController>().growArmy(bon, am);
         transform.parent.GetComponent<RecruitDestroyer>().destroyRecruits();
+        FindObjectOfType<AudioManager>().Play("Recruitment");
     }
 }

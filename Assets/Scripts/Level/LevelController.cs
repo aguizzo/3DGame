@@ -114,7 +114,7 @@ public class LevelController : MonoBehaviour
 
     void loadStartLevel()
     {
-        //FindObjectOfType<AudioManager>().Play("LevelTheme");
+        FindObjectOfType<AudioManager>().Play("LevelTheme");
         for(int i = 0; i<5; i++)
         {
             GameObject a = (GameObject)Instantiate(prefabs[level[sections]], new Vector3(0, 0, 28 * sections), prefabs[level[sections]].transform.rotation);
