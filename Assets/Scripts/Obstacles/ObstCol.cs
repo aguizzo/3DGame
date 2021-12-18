@@ -34,6 +34,7 @@ public class ObstCol : MonoBehaviour
             GameObject a = collision.GetComponent<Collider>().gameObject;
             a.transform.parent.GetComponent<CharsController>().ChildDeath(a);
             a.transform.parent = null;
+            FindObjectOfType<AudioManager>().Play("Death");
             Destroy(a);
             Debug.Log("collision");
         }

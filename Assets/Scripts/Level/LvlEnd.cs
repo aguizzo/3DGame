@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class LvlEnd : MonoBehaviour
 {
     LevelController lvlCont;
+    bool end = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +15,11 @@ public class LvlEnd : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if (lvlCont != null)
-            lvlCont.NextLevel();
+        if (lvlCont != null && !end)
+        {
+            end = true;
+            lvlCont.NextLevel();     
+        } 
         else
             Debug.Log("empty");
     }

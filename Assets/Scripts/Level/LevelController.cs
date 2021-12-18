@@ -52,6 +52,7 @@ public class LevelController : MonoBehaviour
         if (!final && CharsController.pos.z > (sections * 28) - 5 * 28)
         {
             GameObject a = (GameObject)Instantiate(prefabs[level[sections]], new Vector3(0, 0, 28 * sections), prefabs[level[sections]].transform.rotation);
+            Debug.Log("nueva seccion");
             a.transform.parent = transform;
             if (level[sections] == 1) Enemies.Add(a.transform.GetChild(3).gameObject);
             else if (level[sections] == 11) final = true;
@@ -97,6 +98,7 @@ public class LevelController : MonoBehaviour
 
     void loadStartLevel()
     {
+        Debug.Log("cargando nivel");
         FindObjectOfType<AudioManager>().Play("LevelTheme");
         for(int i = 0; i<5; i++)
         {
@@ -110,12 +112,15 @@ public class LevelController : MonoBehaviour
 
     public void NextLevel()
     {
-        foreach (Transform t in transform.GetComponentsInChildren<Transform>())
+        foreach (Transform t in transform.GetComponentInChildren<Transform>())
         {
+            
+            
             t.transform.parent = null;
-            Destroy(t.gameObject);
+           Destroy(t.gameObject);
         }
         lvl++;
+        Debug.Log("estas en el nivel " + lvl);
         switch (lvl)
         {
             case 2:
@@ -136,6 +141,8 @@ public class LevelController : MonoBehaviour
         NextEnemyIndex = 0;
         inBattle = false;
         Enemies = new List<GameObject>();
+        sectionCount = 0;
+        final = false;
         loadStartLevel();
     }
 }
