@@ -21,4 +21,9 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("quit");
         Application.Quit();
     }
+
+    public void ButtonSound()
+    {
+        FindObjectOfType<AudioManager>().Play("ButtonPress");
+    }
 }

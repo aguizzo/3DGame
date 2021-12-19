@@ -206,10 +206,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1505182314}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -599,10 +599,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1505182314}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1012,10 +1012,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1505182314}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1366,10 +1366,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1505182314}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2135,10 +2135,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
+      - m_Target: {fileID: 1505182314}
+        m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
+        m_MethodName: ButtonSound
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2319,58 +2319,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1668239469}
   m_CullTransparentMesh: 1
---- !u!1001 &1906030236
+--- !u!1001 &1202253509100024783
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4071454264134086181, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 430965793232034688, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6271004553822334553, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
+    - target: {fileID: 8864680680368942577, guid: 699f8f2e55e03eb40b7a4c0e0d45795e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}

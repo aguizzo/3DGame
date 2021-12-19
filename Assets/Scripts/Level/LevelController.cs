@@ -13,6 +13,8 @@ public class LevelController : MonoBehaviour
     private float startTime;
     private float time = 0f;
     private float interpolationPeriod = 0.2f;
+    private float swordClash = 0.0f;
+    private int swordSound = 1;
     private Vector3 initialPos;
     private bool final = false, start = true;
 
@@ -78,11 +80,25 @@ public class LevelController : MonoBehaviour
         if (inBattle && time >= interpolationPeriod)
         {
             time = time - interpolationPeriod;
-            FindObjectOfType<AudioManager>().Play("SwordClash");
             if (Enemies[NextEnemyIndex].transform.childCount != 1 && units.transform.childCount != 0)
             {
                 Enemies[NextEnemyIndex].GetComponent<EnemiesController>().getDamage();
                 units.GetComponent<CharsController>().getDamage();
+                if (swordClash <= 0.0f)
+                {
+                    if (swordSound == 1)
+                        {
+                            FindObjectOfType<AudioManager>().Play("SwordClash");
+                            swordSound++;
+                        }
+                    else 
+                        {
+                            FindObjectOfType<AudioManager>().Play("SwordClash2");
+                            swordSound = 1;
+                        }
+                        
+                    swordClash = 0.8f;
+                }
             }
             else if (Enemies[NextEnemyIndex].transform.childCount == 1) {
                 GameObject en = Enemies[NextEnemyIndex];
@@ -94,6 +110,7 @@ public class LevelController : MonoBehaviour
                 units.GetComponent<CharsController>().Move();
             }
         }
+        swordClash -= Time.deltaTime;
     }
 
     void loadStartLevel()
