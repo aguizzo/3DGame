@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &430965793232034688
+--- !u!1 &890927199490108573
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8864680680368942577}
-  - component: {fileID: 5027789864358765469}
+  - component: {fileID: 890927199490108575}
+  - component: {fileID: 890927199490108572}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -17,13 +17,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8864680680368942577
+--- !u!4 &890927199490108575
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430965793232034688}
+  m_GameObject: {fileID: 890927199490108573}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -31,13 +31,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5027789864358765469
+--- !u!114 &890927199490108572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 430965793232034688}
+  m_GameObject: {fileID: 890927199490108573}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 277f98387f43c4e4fa48b662efe5eeee, type: 3}
@@ -83,6 +83,12 @@ MonoBehaviour:
   - name: Death
     clip: {fileID: 8300000, guid: 0a8cade0c15a4a44a80dd31fdc8a4444, type: 3}
     volume: 0.36
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: SwordClash2
+    clip: {fileID: 8300000, guid: 3d9ed7c6994e5904aa66e8868a89c511, type: 3}
+    volume: 0.413
     pitch: 1
     loop: 0
     source: {fileID: 0}
