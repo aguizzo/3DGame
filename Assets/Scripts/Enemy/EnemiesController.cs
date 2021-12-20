@@ -29,7 +29,7 @@ public class EnemiesController : MonoBehaviour
         text.GetComponent<UnityEngine.UI.Text>().text = CombatPower.ToString();
         Debug.Log("Calculating positions for enemies");
         calculatePositions();
-        growArmy(LevelController.sections * 2 * LevelController.lvl);
+        growArmy(LevelController.sections * LevelController.lvl);
     }
 
     //UPDATE//

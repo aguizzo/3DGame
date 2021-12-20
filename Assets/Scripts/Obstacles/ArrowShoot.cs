@@ -6,7 +6,7 @@ public class ArrowShoot : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject arrow;
-    public float speed = 30.0f;
+    public float speed = 20.0f;
     float shootInterval = 0.0f;
     void Start()
     {

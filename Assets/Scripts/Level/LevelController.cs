@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelController : MonoBehaviour
 {
@@ -27,11 +28,11 @@ public class LevelController : MonoBehaviour
 
     public static float leftSide = -8f;
     public static float rightSide = 8f;
-    private readonly int[] level1 = { 0, 0, 2, 9, 10, 0, 6, 7, 2, 1, 1, 0, 0, 0, 0, 0, 0, 0, 3 };
-    private readonly int[] level2 = { 0, 2, 0, 2, 2, 3, 2, 3, 4, 5, 6, 7, 8, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3 };
-    private readonly int[] level3 = { 0, 0, 0, 0, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0 };
-    private readonly int[] level4 = { 0, 0, 0, 0, 0, 3 };
-    private readonly int[] level5 = { 0, 0, 1, 1, 0, 3 };
+    private readonly int[] level1 = { 0, 0, 2, 9, 10, 6, 7, 0, 1, 0, 9, 8, 5, 2, 10, 9, 0, 1, 3 };
+    private readonly int[] level2 = { 0, 0, 2, 5, 15, 2, 1, 8, 9, 10, 15, 5, 2, 1, 0, 8, 5, 0, 3 };
+    private readonly int[] level3 = { 0, 0, 2, 4, 2, 1, 5, 8, 2, 7, 5, 4, 2, 1, 0, 8, 7, 0, 3 };
+    private readonly int[] level4 = { 0, 0, 2, 5, 8, 2, 1, 0, 7, 6, 4, 4, 5, 8, 2, 1, 7, 0, 3 };
+    private readonly int[] level5 = { 0, 0, 2, 2, 1, 4, 4, 2, 1, 0, 2, 8, 9, 5, 7, 2, 4, 2, 1, 0, 3 };
     private int[] level;
     public static int lvl;
 
@@ -219,8 +220,9 @@ public class LevelController : MonoBehaviour
                 prefabs = prefabsT;
                 break;
             case 6:
-                //volver al men�
-                break;
+                FindObjectOfType<AudioManager>().Play("MenuTheme");
+                SceneManager.LoadScene("Credits");
+                return;
         }
         units.transform.GetComponent<CharsController>().reset();
         pv.transform.position = initialPos;
@@ -241,6 +243,7 @@ public class LevelController : MonoBehaviour
 
     public void EndLevel()
     {
+        FindObjectOfType<AudioManager>().StopPlaying("LevelTheme");
         FindObjectOfType<AudioManager>().Play("Victory");
         GroupMovement.speed = 0f;
         CharsController.animState = 4;

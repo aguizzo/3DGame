@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PoppingMenu : MonoBehaviour
 {
@@ -115,7 +116,8 @@ public class PoppingMenu : MonoBehaviour
         }
         else
         {
-            //return to main menu
+            FindObjectOfType<AudioManager>().StopPlaying("LevelTheme");
+            SceneManager.LoadScene("Menu");
         }
     }
 
@@ -135,7 +137,9 @@ public class PoppingMenu : MonoBehaviour
 
     public void returnToMenu()
     {
-        //return to menu and reescale time
+        Time.timeScale = 1f;
+        FindObjectOfType<AudioManager>().StopPlaying("LevelTheme");
+        SceneManager.LoadScene("Menu");
     }
 
     public void exitGame()
