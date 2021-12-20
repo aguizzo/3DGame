@@ -16,9 +16,21 @@ public class MainMenuScript : MonoBehaviour
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void Credits()
+    {
+        SceneManager.LoadScene("credits");
+        //FindObjectOfType<AudioManager>().StopPlaying("MenuTheme");
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void QuitGame()
     {
         Debug.Log("quit");
         Application.Quit();
+    }
+
+    public void ButtonSound()
+    {
+        FindObjectOfType<AudioManager>().Play("ButtonPress");
     }
 }

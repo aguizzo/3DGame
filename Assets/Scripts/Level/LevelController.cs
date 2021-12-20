@@ -17,6 +17,8 @@ public class LevelController : MonoBehaviour
     private float startTime;
     public float time = 0f, endtimer = 0f, dietimer = 0f;
     private float interpolationPeriod = 1f;
+    private float swordClash = 0.0f;
+    private int swordSound = 1;
     private Vector3 initialPos;
     public bool final = false, end = false, lost = false, lostimer = false;
     public static bool godmode = false, inv = false;
@@ -92,7 +94,21 @@ public class LevelController : MonoBehaviour
             if (inBattle && time >= interpolationPeriod && CharsController.animState == 2)
             {
                 time = 0f;
-                FindObjectOfType<AudioManager>().Play("SwordClash");
+                if (swordClash <= 0.0f)
+                {
+                    if (swordSound == 1)
+                        {
+                            FindObjectOfType<AudioManager>().Play("SwordClash");
+                            swordSound++;
+                        }
+                    else 
+                        {
+                            FindObjectOfType<AudioManager>().Play("SwordClash2");
+                            swordSound = 1;
+                        }
+                        
+                    swordClash = 0.8f;
+                }
                 if (actualEnemy.transform.childCount != 1 && units.transform.childCount != 0)
                 {
                     actualEnemy.GetComponent<EnemiesController>().getDamage();
@@ -146,6 +162,7 @@ public class LevelController : MonoBehaviour
                 PoppingMenu.DeathMenu.gameObject.SetActive(true);
             }
         }
+        swordClash -= Time.deltaTime;
     }
 
     void loadStartLevel()
@@ -202,7 +219,7 @@ public class LevelController : MonoBehaviour
                 prefabs = prefabsT;
                 break;
             case 6:
-                //volver al menú
+                //volver al menï¿½
                 break;
         }
         units.transform.GetComponent<CharsController>().reset();
