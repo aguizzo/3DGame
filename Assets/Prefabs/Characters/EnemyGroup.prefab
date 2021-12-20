@@ -233,10 +233,12 @@ MonoBehaviour:
   nc: 1
   nca: 1
   nca2: 0
+  nca3: 0
   animStatePublic: 0
   positionList: []
   CombatPower: 0
   giantLife: 0
+  enormLife: 0
 --- !u!1001 &5325236070185159560
 PrefabInstance:
   m_ObjectHideFlags: 0

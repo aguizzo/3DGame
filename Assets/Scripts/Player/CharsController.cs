@@ -21,25 +21,28 @@ public class CharsController : MonoBehaviour
         pos = transform.position;
         startPosition = new Vector3(0,pos.y, 0);
         animState = 0;
-        calculatePositions();
         CombatPower = 1;
         giantLife = 20;
         enormLife = 100;
         Life = (CombatPower - (20 - giantLife) - (100 - enormLife));
+        calculatePositions();
         transform.GetComponent<ParticleSystem>().Stop();
     }
 
     //UPDATE//
     void Update()
     {
-        pos = transform.position;
-        if (Input.GetKeyDown(KeyCode.G))
+        if (!PoppingMenu.gamePaused)
         {
-            growArmy(1, false);
+            pos = transform.position;
+            if (Input.GetKeyDown(KeyCode.U) && LevelController.godmode)
+            {
+                growArmy(1, false);
+            }
+            animStatePublic = animState;
+            CombatPower = nca + nca2 * 20 + nca3 * 100;
+            Life = (CombatPower - (20 - giantLife) - (100 - enormLife));
         }
-        animStatePublic = animState;
-        CombatPower = nca + nca2 * 20 + nca3 * 100;
-        Life = (CombatPower - (20 - giantLife) - (100 - enormLife));
     }
 
     public void growArmy(int c, bool m)
@@ -72,6 +75,7 @@ public class CharsController : MonoBehaviour
                 else nca++;
             }
         }
+        setPositions();
     }
 
     private void calculatePositions()
@@ -168,26 +172,26 @@ public class CharsController : MonoBehaviour
         }
         else if (nca2 != 0)
         {
-            if (giantLife != 0) giantLife -= 1;
-            else
+            giantLife -= 1;
+            if (giantLife == 0)
             {
                 GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
                 g.transform.parent = null;
                 Destroy(g);
                 nca2 -= 1;
-                if (nca2 != 0) giantLife = 20;
+                giantLife = 20;
             }
         }
         else if (nca3 != 0)
         {
-            if (enormLife != 0) enormLife -= 1;
-            else
+            enormLife -= 1;
+            if (enormLife == 0)
             {
                 GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
                 g.transform.parent = null;
                 Destroy(g);
                 nca3 -= 1;
-                if (nca3 != 0) enormLife = 100;
+                enormLife = 100;
             }
         }
     }
@@ -216,5 +220,22 @@ public class CharsController : MonoBehaviour
             nc--;
             nca--;
         }
+    }
+
+    public void reset()
+    {
+        while (transform.childCount > 0)
+        {
+            GameObject a = transform.GetChild(transform.childCount - 1).gameObject;
+            a.transform.SetParent(null);
+            ChildDeath(a);
+            Destroy(a);
+        }
+        GameObject obj = (GameObject)Instantiate(playerObj, (new Vector3(transform.position.x, 0, transform.position.z)) + positionList[nca + nca2 + nca3], playerObj.transform.rotation);
+        obj.transform.localScale = new Vector3(1, 1, 1);
+        Debug.Log(nca);
+        obj.transform.parent = transform;
+        nc++;
+        nca++;
     }
 }

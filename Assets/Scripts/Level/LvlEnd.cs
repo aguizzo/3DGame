@@ -18,7 +18,7 @@ public class LvlEnd : MonoBehaviour
         if (lvlCont != null && !end)
         {
             end = true;
-            lvlCont.NextLevel();     
+            lvlCont.EndLevel();     
         } 
         else
             Debug.Log("empty");

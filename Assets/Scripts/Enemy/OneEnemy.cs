@@ -17,9 +17,9 @@ public class OneEnemy : MonoBehaviour
     //UPDATE//
     void Update()
     {
-        if (anim.GetFloat("Animation") != EnemiesController.animStateEnemy)
+        if (anim.GetFloat("Animation") != transform.parent.GetComponent<EnemiesController>().animStateEnemy)
         {
-            anim.SetFloat("Animation", EnemiesController.animStateEnemy);
+            anim.SetFloat("Animation", transform.parent.GetComponent<EnemiesController>().animStateEnemy);
         }
     }
 }

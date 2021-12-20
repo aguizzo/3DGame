@@ -20,9 +20,20 @@ public class ArrowShoot : MonoBehaviour
         if (shootInterval <= 0.0f)
         {
             shootInterval = 1.5f;
-            GameObject obj = Instantiate(arrow, transform.position + new Vector3(1.0f, 0.0f, 0.0f),
-                arrow.transform.rotation);
-            obj.GetComponent<Rigidbody>().velocity = new Vector3(-speed, 0.0f, 0.0f);
+            if (transform.rotation.y != 0)
+            {
+                GameObject obj = Instantiate(arrow, transform.position + new Vector3(1.0f, 0.0f, 0.0f),
+                transform.rotation);
+                obj.transform.SetParent(transform);
+                obj.GetComponent<Rigidbody>().velocity = new Vector3(speed, 0.0f, 0.0f);
+            }
+            else
+            {
+                GameObject obj = Instantiate(arrow, transform.position + new Vector3(-1.0f, 0.0f, 0.0f),
+                transform.rotation);
+                obj.transform.SetParent(transform);
+                obj.GetComponent<Rigidbody>().velocity = new Vector3(-speed, 0.0f, 0.0f);
+            }
         }
         
     }

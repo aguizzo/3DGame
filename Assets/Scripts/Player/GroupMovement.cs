@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GroupMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 0f;
-    private bool start = true;
+    public static float speed = 0f;
+    public float sp;
+    public static bool start = true;
     private GameObject cam;
     private float battlePosZ;
 
@@ -18,22 +19,33 @@ public class GroupMovement : MonoBehaviour
     //UPDATE//
     void Update()
     {
-        if (LevelController.inBattle) {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, transform.position.y, battlePosZ), 10 * Time.deltaTime);
-            speed = 0f;
-        }
-        else battlePosZ = transform.position.z + 10;
-
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && start == true)
+        if (!PoppingMenu.gamePaused)
         {
-            speed = 15f;
-            start = false;
+            if (LevelController.inBattle)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, transform.position.y, battlePosZ), 10 * Time.deltaTime);
+                speed = 0f;
+            }
+            else battlePosZ = transform.position.z + 10;
+
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && start == true)
+            {
+                speed = 15f;
+                start = false;
+            }
+            transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
+            sp = speed;
         }
-        transform.Translate(Vector3.forward * Time.deltaTime * speed, Space.World);
     }
 
     public void Move()
     {
         speed = 15f;
+    }
+
+    public void reset()
+    {
+        start = true;
+        speed = 0f;
     }
 }

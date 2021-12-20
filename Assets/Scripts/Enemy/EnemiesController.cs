@@ -7,12 +7,12 @@ public class EnemiesController : MonoBehaviour
     public GameObject playerObj;
     public int nc = 1, nca = 1, nca2 = 0, nca3 = 0;
     public static Vector3 pos;
-    public static int animStateEnemy;
+    public int animStateEnemy;
     public int animStatePublic;
     private Vector3 startPosition;
     public List<Vector3> positionList;
     public int CombatPower;
-    public int giantLife, enormLife;
+    public int Life, giantLife, enormLife;
     private GameObject text;
 
     // Start is called before the first frame update
@@ -27,25 +27,24 @@ public class EnemiesController : MonoBehaviour
         giantLife = 20;
         enormLife = 100;
         text.GetComponent<UnityEngine.UI.Text>().text = CombatPower.ToString();
+        Debug.Log("Calculating positions for enemies");
         calculatePositions();
+        growArmy(LevelController.sections * 2 * LevelController.lvl);
     }
 
     //UPDATE//
     void Update()
     {
         pos = transform.position;
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.Q) && LevelController.godmode)
         {
             growArmy(20);
         }
         animStatePublic = animStateEnemy;
         CombatPower = nca + nca2 * 20 + nca3 * 100;
-
-        if (LevelController.inBattle)
-        {
-            animStateEnemy = 2;
-        }
-        text.GetComponent<UnityEngine.UI.Text>().text = (CombatPower - (20 - giantLife) - (100 - enormLife)).ToString();
+        Life = CombatPower - (20 - giantLife) - (100 - enormLife);
+        if(Life > 0) text.GetComponent<UnityEngine.UI.Text>().text = Life.ToString();
+        else text.GetComponent<UnityEngine.UI.Text>().text = "";
     }
 
     public void growArmy(int c)
@@ -114,8 +113,8 @@ public class EnemiesController : MonoBehaviour
 
     private bool Clone()
     {
-        Debug.Log("clonando enemigo");
-        if ((nca + nca2) > (positionList.Count - 2))
+        Debug.Log("clonando enemigo " + (nca + nca2 + nca3) + " " + (positionList.Count - 1));
+        if ((nca + nca2 + nca3) > (positionList.Count - 1))
         {
             Debug.Log("no more clones can be added");
             return false;
@@ -177,26 +176,26 @@ public class EnemiesController : MonoBehaviour
         }
         else if (nca2 != 0)
         {
-            if (giantLife != 0) giantLife -= 1;
-            else
+            giantLife -= 1;
+            if(giantLife == 0)
             {
                 GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
                 g.transform.parent = null;
                 Destroy(g);
                 nca2 -= 1;
-                if (nca2 != 0) giantLife = 20;
+                giantLife = 20;
             }
         }
         else if (nca3 != 0)
         {
-            if (enormLife != 0) enormLife -= 1;
-            else
+            enormLife -= 1;
+            if(enormLife == 0)
             {
                 GameObject g = transform.GetChild(transform.childCount - 1).gameObject;
                 g.transform.parent = null;
                 Destroy(g);
                 nca3 -= 1;
-                if (nca3 != 0) enormLife = 100;
+                enormLife = 100;
             }
         }
     }

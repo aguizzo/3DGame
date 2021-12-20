@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CharsMovement : MonoBehaviour
 {
-    private bool start;
-    private bool inBattle;
+    public static bool start;
     private float battlePosZ;
     public static Vector3 pos;
     private float lateralSpeed;
@@ -16,38 +15,49 @@ public class CharsMovement : MonoBehaviour
         text = transform.GetChild(1).GetChild(0).gameObject;
         text.GetComponent<UnityEngine.UI.Text>().text = CharsController.Life.ToString();
         start = true;
-        inBattle = false;
         pos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pos = transform.position;
-        if (LevelController.inBattle)
+        if (!PoppingMenu.gamePaused)
         {
-            transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, transform.position.y, transform.position.z), 10 * Time.deltaTime);
-            if (Mathf.Round(pos.z) == Mathf.Round(battlePosZ)) CharsController.animState = 2;
+            pos = transform.position;
+            if (LevelController.inBattle)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, new Vector3(0, transform.position.y, transform.position.z), 10 * Time.deltaTime);
+                if (Mathf.Round(pos.z) == Mathf.Round(battlePosZ))
+                {
+                    CharsController.animState = 2;
+                    LevelController.actualEnemy.GetComponent<EnemiesController>().animStateEnemy = 2;
+                }
+            }
+            else
+            {
+                battlePosZ = pos.z + 10;
+                if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && start)
+                {
+                    CharsController.animState = 1;
+                    lateralSpeed = 10f;
+                    start = false;
+                }
+                if (!start && (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !LevelController.inBattle)
+                {
+                    moveLeft();
+                }
+                else if (!start && (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !LevelController.inBattle)
+                {
+                    moveRight();
+                }
+            }
+            if (CharsController.Life == 0)
+            {
+                text.GetComponent<UnityEngine.UI.Text>().text = "";
+                transform.position = new Vector3(0, transform.position.y, transform.position.z);
+            }
+            else text.GetComponent<UnityEngine.UI.Text>().text = CharsController.Life.ToString();
         }
-        else
-        {
-            battlePosZ = pos.z + 10;
-            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && start == true)
-            {
-                CharsController.animState = 1;
-                lateralSpeed = 10f;
-                start = false;
-            }
-            if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !inBattle)
-            {
-                moveLeft();
-            }
-            else if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !inBattle)
-            {
-                moveRight();
-            }
-        }
-        text.GetComponent<UnityEngine.UI.Text>().text = CharsController.Life.ToString();
     }
     private void moveLeft()
     {
@@ -63,5 +73,11 @@ public class CharsMovement : MonoBehaviour
         {
             transform.Translate(Vector3.right * Time.deltaTime * lateralSpeed, Space.World);
         }
+    }
+
+    public void reset()
+    {
+        start = true;
+        transform.position = new Vector3(0, transform.position.y, transform.position.z);
     }
 }
